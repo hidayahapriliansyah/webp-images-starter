@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -38,6 +39,17 @@ module.exports = {
           to: path.resolve(__dirname, 'dist'),
         },
       ],
+    }),
+    new ImageminWebpWebpackPlugin({
+      config: [
+        {
+          test: /\.(jpe?g|png)/,
+          options: {
+            quality: 50
+          }
+        },
+      ],
+      overrideExtension: true,
     }),
   ],
 };
